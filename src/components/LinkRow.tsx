@@ -41,7 +41,7 @@ const LinkRow = () => {
 
   return (
     <motion.nav
-      className="flex items-center justify-between w-full max-w-4xl px-4 mt-6"
+      className="flex items-center justify-between w-full max-w-4xl px-4 mt-8"
       variants={menuContainerVariants}
       initial="hidden"
       animate="visible"
