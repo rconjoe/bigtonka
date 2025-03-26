@@ -27,9 +27,9 @@ const LinkRow = () => {
 
   // Define menu links - easy to add or remove
   const menuLinks = [
-    { text: "MERCH", href: "/merch" },
     { text: "SPONSORS", href: "/sponsors" },
     { text: "MEDIA", href: "/media" },
+    { text: "MERCH", href: "/merch" },
     // You can add more links here and they'll automatically be spaced evenly
   ]
 
