@@ -59,7 +59,7 @@ const LinkTree = () => {
 
   return (
     <motion.div
-      className="w-full max-w-2xl mx-auto px-4 mt-8 md:mt-12 flex flex-col space-y-3"
+      className="w-full max-w-2xl lg:max-w-4xl mx-auto px-4 mt-8 md:mt-12 flex flex-col space-y-3"
       variants={linkTreeVariants}
       initial="hidden"
       animate="visible"
