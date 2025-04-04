@@ -9,14 +9,14 @@ type OverlayVariant = "none" | "light" | "dark"
 type MediaType = "image" | "video"
 
 const backgroundVariants = cva(
-  "relative w-full overflow-hidden",
+  "relative w-full", // Removed overflow-hidden to allow scrolling
   {
     variants: {
       overlay: {
         none: "",
         light:
-          "before:absolute before:inset-0 before:bg-white before:opacity-40 before:z-10",
-        dark: "before:absolute before:inset-0 before:bg-black before:opacity-40 before:z-10",
+          "before:fixed before:inset-0 before:bg-white before:opacity-40 before:z-10", // Changed to fixed
+        dark: "before:fixed before:inset-0 before:bg-black before:opacity-40 before:z-10", // Changed to fixed
       },
       type: {
         image: "",
@@ -47,7 +47,7 @@ export const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
   alt = "",
   className,
   children,
-  height = "h-screen min-h-[500px] lg:min-h-[600px] max-h-[1000px]",
+  height = "min-h-screen", // Changed to min-h-screen to allow expansion
 }) => {
   const mediaRef = useRef<HTMLVideoElement | null>(null)
   const mediaClasses = cn(backgroundVariants({ overlay: variant, type }), height, className)
@@ -60,7 +60,7 @@ export const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
           aria-hidden="true"
           muted
           loop
-          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-300 pointer-events-none z-0"
+          className="fixed inset-0 h-full w-full object-cover transition-opacity duration-300 pointer-events-none z-0" // Changed to fixed
           autoPlay
           playsInline
         >
@@ -73,7 +73,7 @@ export const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
         <img
           src={src}
           alt={alt}
-          className="absolute inset-0 h-full w-full object-cover rounded-br-[88px] z-0"
+          className="fixed inset-0 h-full w-full object-cover rounded-br-[88px] z-0" // Changed to fixed
           loading="eager"
         />
       )
@@ -84,8 +84,11 @@ export const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
     <div className={mediaClasses}>
       {renderMedia()}
       {children && (
-        <div className="relative z-20 h-full w-full">{children}</div>
+        <div className="relative z-20 w-full min-h-screen pb-16">
+          {children}
+        </div>
       )}
     </div>
   )
 }
+
