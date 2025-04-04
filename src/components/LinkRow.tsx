@@ -4,7 +4,7 @@ import React from "react"
 import { motion } from "framer-motion"
 import { FaYoutube, FaInstagram } from "react-icons/fa"
 
-const LinkRow = () => {
+const LinkRow = ({ setCurrentView, currentView }) => {
   const menuContainerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -25,12 +25,11 @@ const LinkRow = () => {
     },
   }
 
-  // Define menu links - easy to add or remove
+  // Define menu links with view values (removed HOME)
   const menuLinks = [
-    { text: "SPONSORS", href: "/sponsors" },
-    { text: "MEDIA", href: "/media" },
-    { text: "MERCH", href: "/merch" },
-    // You can add more links here and they'll automatically be spaced evenly
+    { text: "SPONSORS", href: "#sponsors", view: "sponsors" },
+    { text: "MEDIA", href: "#media", view: "media" },
+    { text: "MERCH", href: "#merch", view: "merch" },
   ]
 
   // Define social media links
@@ -38,6 +37,12 @@ const LinkRow = () => {
     { icon: <FaYoutube size={24} />, href: "https://youtube.com" },
     { icon: <FaInstagram size={24} />, href: "https://instagram.com" },
   ]
+
+  // Handle link click
+  const handleLinkClick = (e, view) => {
+    e.preventDefault()
+    setCurrentView(view)
+  }
 
   return (
     <motion.nav
@@ -53,8 +58,10 @@ const LinkRow = () => {
           <motion.a
             key={index}
             href={link.href}
+            onClick={(e) => handleLinkClick(e, link.view)}
             variants={menuItemVariants}
-            className="text-white md:text-2xl font-medium tracking-wider hover:text-red-400 transition-colors duration-300 text-shadow"
+            className={`text-white md:text-2xl font-medium tracking-wider hover:text-red-400 transition-colors duration-300 text-shadow ${currentView === link.view ? "text-red-400" : ""
+              }`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -87,3 +94,4 @@ const LinkRow = () => {
 }
 
 export default LinkRow
+

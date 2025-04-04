@@ -25,13 +25,11 @@ const LinkTree = () => {
     },
   }
 
-  // Define LinkTree-style buttons (now with optional image property)
   const linkTreeButtons = [
     {
       text: "Latest Episode",
       href: "/latest-episode",
       description: "Sub to the YouTube",
-      image: "public/tonksurronster.jpg" // Optional image path
     },
     {
       text: "Subscribe",
@@ -42,13 +40,11 @@ const LinkTree = () => {
       text: "10% off at ERidePro",
       href: "/behind-scenes",
       description: "Get a new SS or whatever it's called",
-      image: "public/eridepro.png"
     },
     {
       text: "Tonka Clothing Line",
       href: "/newsletter",
       description: "This whole section works just like linktree",
-      image: "public/tonkaware.png"
     },
     {
       text: "15% some shit",
