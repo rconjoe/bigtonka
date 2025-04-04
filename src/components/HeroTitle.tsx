@@ -3,7 +3,7 @@
 import React from "react"
 import { motion } from "framer-motion"
 
-const HeroTitle = ({ animationKey }) => {
+const HeroTitle = ({ animationKey, setCurrentView }) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -31,13 +31,21 @@ const HeroTitle = ({ animationKey }) => {
     { text: "AMERICA", color: "text-blue-600/75" },
   ]
 
+  // Handle click to navigate to home
+  const handleTitleClick = () => {
+    setCurrentView("home")
+  }
+
   return (
     <motion.div
       key={animationKey}
-      className="text-5xl md:text-8xl font-bold tracking-wide flex flex-wrap justify-center gap-x-8 gap-y-1"
+      className="text-5xl md:text-8xl font-bold tracking-wide flex flex-wrap justify-center gap-x-8 gap-y-1 cursor-pointer"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      onClick={handleTitleClick}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
     >
       {words.map((word, index) => (
         <motion.span
@@ -53,3 +61,4 @@ const HeroTitle = ({ animationKey }) => {
 }
 
 export default HeroTitle
+
