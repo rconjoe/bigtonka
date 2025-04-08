@@ -7,6 +7,7 @@ import LinkRow from "./LinkRow"
 import LinkTree from "./LinkTree"
 import SponsorShowcase from "./SponsorShowcase"
 import MediaShowcase from "./MediaShowcase"
+import MerchStore from "./MerchStore" // Import the new component
 
 const AnimatedHero = () => {
   // State for animation cycles
@@ -40,10 +41,10 @@ const AnimatedHero = () => {
         {currentView === "home" && <LinkTree />}
         {currentView === "sponsors" && <SponsorShowcase />}
         {currentView === "media" && <MediaShowcase />}
+        {currentView === "merch" && <MerchStore />}
       </div>
     </BackgroundMedia>
   )
 }
 
 export default AnimatedHero
-
