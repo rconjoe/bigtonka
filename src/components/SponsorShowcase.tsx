@@ -1,7 +1,6 @@
-"use client"
+"use client";
 
-import React from "react"
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 const SponsorShowcase = () => {
   const sponsorContainerVariants = {
@@ -13,7 +12,7 @@ const SponsorShowcase = () => {
         delayChildren: 0.2,
       },
     },
-  }
+  };
 
   const sponsorItemVariants = {
     hidden: { opacity: 0, y: 15 },
@@ -22,7 +21,7 @@ const SponsorShowcase = () => {
       y: 0,
       transition: { duration: 0.5, ease: "easeOut" },
     },
-  }
+  };
 
   // Mock data for sponsors
   const sponsors = [
@@ -61,7 +60,7 @@ const SponsorShowcase = () => {
       link: "https://techinnovations.com",
       size: "small",
     },
-  ]
+  ];
 
   // Helper function to determine grid size classes
   const getSizeClasses = (size) => {
@@ -74,7 +73,7 @@ const SponsorShowcase = () => {
       default:
         return "md:col-span-1 md:row-span-1";
     }
-  }
+  };
 
   return (
     <motion.div
@@ -112,7 +111,9 @@ const SponsorShowcase = () => {
                   className="max-h-full max-w-full object-contain"
                 />
               ) : (
-                <div className="text-white text-2xl md:text-3xl font-bold">{sponsor.name}</div>
+                <div className="text-white text-2xl md:text-3xl font-bold">
+                  {sponsor.name}
+                </div>
               )}
             </div>
 
@@ -132,7 +133,7 @@ const SponsorShowcase = () => {
         ))}
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default SponsorShowcase
+export default SponsorShowcase;

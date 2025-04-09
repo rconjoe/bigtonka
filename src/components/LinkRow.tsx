@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import React from "react"
-import { motion } from "framer-motion"
-import { FaYoutube, FaInstagram } from "react-icons/fa"
+import { motion } from "framer-motion";
+import { FaYoutube, FaInstagram } from "react-icons/fa";
 
 const LinkRow = ({ setCurrentView, currentView }) => {
   const menuContainerVariants = {
@@ -14,7 +13,7 @@ const LinkRow = ({ setCurrentView, currentView }) => {
         delayChildren: 0.3,
       },
     },
-  }
+  };
 
   const menuItemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -23,26 +22,26 @@ const LinkRow = ({ setCurrentView, currentView }) => {
       y: 0,
       transition: { duration: 0.6, ease: "easeOut" },
     },
-  }
+  };
 
   // Define menu links with view values (removed HOME)
   const menuLinks = [
     { text: "SPONSORS", href: "#sponsors", view: "sponsors" },
     { text: "MEDIA", href: "#media", view: "media" },
     { text: "MERCH", href: "#merch", view: "merch" },
-  ]
+  ];
 
   // Define social media links
   const socialLinks = [
     { icon: <FaYoutube size={24} />, href: "https://youtube.com" },
     { icon: <FaInstagram size={24} />, href: "https://instagram.com" },
-  ]
+  ];
 
   // Handle link click
   const handleLinkClick = (e, view) => {
-    e.preventDefault()
-    setCurrentView(view)
-  }
+    e.preventDefault();
+    setCurrentView(view);
+  };
 
   return (
     <motion.nav
@@ -90,8 +89,7 @@ const LinkRow = ({ setCurrentView, currentView }) => {
         </motion.div>
       </div>
     </motion.nav>
-  )
-}
+  );
+};
 
-export default LinkRow
-
+export default LinkRow;

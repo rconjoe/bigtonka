@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
-import React from "react"
-import { motion } from "framer-motion"
-import { FaArrowRight } from "react-icons/fa"
+import { motion } from "framer-motion";
+import { FaArrowRight } from "react-icons/fa";
 
 const LinkTree = () => {
   const linkTreeVariants = {
@@ -14,7 +13,7 @@ const LinkTree = () => {
         delayChildren: 1.0,
       },
     },
-  }
+  };
 
   const linkTreeItemVariants = {
     hidden: { opacity: 0, y: 15 },
@@ -23,7 +22,7 @@ const LinkTree = () => {
       y: 0,
       transition: { duration: 0.5, ease: "easeOut" },
     },
-  }
+  };
 
   const linkTreeButtons = [
     {
@@ -51,7 +50,7 @@ const LinkTree = () => {
       href: "/events",
       description: "Some other affiliate",
     },
-  ]
+  ];
 
   return (
     <motion.div
@@ -65,25 +64,25 @@ const LinkTree = () => {
           key={index}
           href={button.href}
           variants={linkTreeItemVariants}
-          className={`flex items-center justify-between w-full p-4 rounded-lg backdrop-blur-sm ${button.image ? "bg-black/40" : "bg-white/10 hover:bg-white/20"
-            } border border-white/20 transition-all duration-300 group relative overflow-hidden font-tektur`}
+          className="flex items-center justify-between w-full p-4 rounded-lg backdrop-blur-sm bg-white/10 hover:bg-white/20
+            border border-white/20 transition-all duration-300 group relative overflow-hidden font-tektur"
           whileHover={{
             scale: 1.02,
-            transition: { duration: 0.2 }
+            transition: { duration: 0.2 },
           }}
           whileTap={{ scale: 0.98 }}
         >
           {/* Background image (if provided) */}
-          {button.image && (
-            <div className="absolute inset-0 z-0">
-              <img
-                src={button.image}
-                alt=""
-                className="w-full h-full object-cover filter opacity-40"
-              />
-              <div className="absolute inset-0 bg-black/10" />
-            </div>
-          )}
+          {/* {button.image && ( */}
+          {/*   <div className="absolute inset-0 z-0"> */}
+          {/*     <img */}
+          {/*       src={button.image} */}
+          {/*       alt="" */}
+          {/*       className="w-full h-full object-cover filter opacity-40" */}
+          {/*     /> */}
+          {/*     <div className="absolute inset-0 bg-black/10" /> */}
+          {/*   </div> */}
+          {/* )} */}
 
           {/* Content */}
           <div className="flex flex-col relative z-10">
@@ -98,7 +97,7 @@ const LinkTree = () => {
         </motion.a>
       ))}
     </motion.div>
-  )
-}
+  );
+};
 
-export default LinkTree
+export default LinkTree;

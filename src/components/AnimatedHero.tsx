@@ -1,28 +1,28 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from "react"
-import { BackgroundMedia } from "./cult/BackgroundMedia"
-import HeroTitle from "./HeroTitle"
-import LinkRow from "./LinkRow"
-import LinkTree from "./LinkTree"
-import SponsorShowcase from "./SponsorShowcase"
-import MediaShowcase from "./MediaShowcase"
-import MerchStore from "./MerchStore" // Import the new component
+import { useState, useEffect } from "react";
+import { BackgroundMedia } from "./cult/BackgroundMedia";
+import HeroTitle from "./HeroTitle";
+import LinkRow from "./LinkRow";
+import LinkTree from "./LinkTree";
+import SponsorShowcase from "./SponsorShowcase";
+import MediaShowcase from "./MediaShowcase";
+import MerchStore from "./MerchStore"; // Import the new component
 
 const AnimatedHero = () => {
   // State for animation cycles
-  const [animationKey, setAnimationKey] = useState(0)
+  const [animationKey, setAnimationKey] = useState(0);
   // State to track current view/page
-  const [currentView, setCurrentView] = useState("home")
+  const [currentView, setCurrentView] = useState("home");
 
   // Reset animation every 8 seconds
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setAnimationKey(prevKey => prevKey + 1)
-    }, 8000)
+      setAnimationKey((prevKey) => prevKey + 1);
+    }, 8000);
 
-    return () => clearInterval(intervalId)
-  }, [])
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <BackgroundMedia
@@ -32,7 +32,10 @@ const AnimatedHero = () => {
     >
       <div className="flex flex-col items-center justify-start w-full pt-6 md:pt-10 pb-12">
         {/* Main title - now with setCurrentView prop */}
-        <HeroTitle animationKey={animationKey} setCurrentView={setCurrentView} />
+        <HeroTitle
+          animationKey={animationKey}
+          setCurrentView={setCurrentView}
+        />
 
         {/* Navigation links with setCurrentView prop */}
         <LinkRow setCurrentView={setCurrentView} currentView={currentView} />
@@ -44,7 +47,7 @@ const AnimatedHero = () => {
         {currentView === "merch" && <MerchStore />}
       </div>
     </BackgroundMedia>
-  )
-}
+  );
+};
 
-export default AnimatedHero
+export default AnimatedHero;

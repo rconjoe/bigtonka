@@ -1,9 +1,14 @@
-"use client"
+"use client";
 
-import React from "react"
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
+import type { Key } from "react";
 
-const HeroTitle = ({ animationKey, setCurrentView }) => {
+type HeroTitleProps = {
+  animationKey: Key | null | undefined;
+  setCurrentView: (view: string) => void;
+};
+
+const HeroTitle = ({ animationKey, setCurrentView }: HeroTitleProps) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -13,7 +18,7 @@ const HeroTitle = ({ animationKey, setCurrentView }) => {
         delayChildren: 0.1,
       },
     },
-  }
+  };
 
   const wordVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -22,19 +27,19 @@ const HeroTitle = ({ animationKey, setCurrentView }) => {
       y: 0,
       transition: { duration: 1.0, ease: "easeOut" },
     },
-  }
+  };
 
   // Define words with their colors
   const words = [
     { text: "WHAT'S", color: "text-red-600/75" },
     { text: "GOOD", color: "text-white/75" },
     { text: "AMERICA", color: "text-blue-600/75" },
-  ]
+  ];
 
   // Handle click to navigate to home
   const handleTitleClick = () => {
-    setCurrentView("home")
-  }
+    setCurrentView("home");
+  };
 
   return (
     <motion.div
@@ -57,8 +62,7 @@ const HeroTitle = ({ animationKey, setCurrentView }) => {
         </motion.span>
       ))}
     </motion.div>
-  )
-}
+  );
+};
 
-export default HeroTitle
-
+export default HeroTitle;
