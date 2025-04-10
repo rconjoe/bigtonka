@@ -1,5 +1,6 @@
 "use client";
 
+import { getRouteApi } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
 const SponsorShowcase = () => {
@@ -23,45 +24,48 @@ const SponsorShowcase = () => {
     },
   };
 
-  // Mock data for sponsors
-  const sponsors = [
-    {
-      name: "ERidePro",
-      logo: "https://static.wixstatic.com/media/827dc9_a86b61ece2f7481aab68411613d86ce2~mv2.png/v1/crop/x_278,y_306,w_4230,h_2629/fill/w_605,h_376,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_3581%E5%89%AF%E6%9C%AC.png",
-      description: "Premium electric rides and accessories",
-      href: "https://eridepro.com",
-      link: "Get a new bike today",
-      size: "large", // For bento grid sizing
-    },
-    {
-      name: "Tonka Apparel",
-      logo: "/sponsors/tonka.png",
-      description: "Official What's Good America clothing",
-      href: "https://tonkaapparel.com",
-      size: "medium",
-    },
-    {
-      name: "Action Sports",
-      logo: "/sponsors/actionsports.png",
-      description: "Your ultimate source for extreme sports gear",
-      href: "https://actionsports.com",
-      size: "medium",
-    },
-    {
-      name: "Energy Drinks",
-      logo: "/sponsors/energy.png",
-      description: "Fuel your adventures",
-      href: "https://energydrinks.com",
-      size: "small",
-    },
-    {
-      name: "Tech Innovations",
-      logo: "/sponsors/tech.png",
-      description: "Cutting edge technology for modern riders",
-      href: "https://techinnovations.com",
-      size: "small",
-    },
-  ];
+  const routeApi = getRouteApi("/");
+  const sponsors = routeApi.useLoaderData().sponsors;
+
+  // // Mock data for sponsors
+  // const sponsors = [
+  //   {
+  //     name: "ERidePro",
+  //     logo: "https://static.wixstatic.com/media/827dc9_a86b61ece2f7481aab68411613d86ce2~mv2.png/v1/crop/x_278,y_306,w_4230,h_2629/fill/w_605,h_376,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_3581%E5%89%AF%E6%9C%AC.png",
+  //     description: "Premium electric rides and accessories",
+  //     href: "https://eridepro.com",
+  //     link: "Get a new bike today",
+  //     size: "large", // For bento grid sizing
+  //   },
+  //   {
+  //     name: "Tonka Apparel",
+  //     logo: "/sponsors/tonka.png",
+  //     description: "Official What's Good America clothing",
+  //     href: "https://tonkaapparel.com",
+  //     size: "medium",
+  //   },
+  //   {
+  //     name: "Action Sports",
+  //     logo: "/sponsors/actionsports.png",
+  //     description: "Your ultimate source for extreme sports gear",
+  //     href: "https://actionsports.com",
+  //     size: "medium",
+  //   },
+  //   {
+  //     name: "Energy Drinks",
+  //     logo: "/sponsors/energy.png",
+  //     description: "Fuel your adventures",
+  //     href: "https://energydrinks.com",
+  //     size: "small",
+  //   },
+  //   {
+  //     name: "Tech Innovations",
+  //     logo: "/sponsors/tech.png",
+  //     description: "Cutting edge technology for modern riders",
+  //     href: "https://techinnovations.com",
+  //     size: "small",
+  //   },
+  // ];
 
   // Helper function to determine grid size classes
   const getSizeClasses = (size) => {
