@@ -5,7 +5,6 @@ import getAll from "@/lib/api";
 export const Route = createFileRoute("/")({
   component: App,
 
-  // make this function a thing
   loader: () => getAll(),
 });
 
