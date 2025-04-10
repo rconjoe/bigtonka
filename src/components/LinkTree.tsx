@@ -1,5 +1,6 @@
 "use client";
 
+import { getRouteApi } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
 
@@ -24,33 +25,37 @@ const LinkTree = () => {
     },
   };
 
-  const linkTreeButtons = [
-    {
-      text: "Latest Episode",
-      href: "/latest-episode",
-      description: "Sub to the YouTube",
-    },
-    {
-      text: "Subscribe",
-      href: "/interviews",
-      description: "Exclusive content and rides",
-    },
-    {
-      text: "10% off at ERidePro",
-      href: "/behind-scenes",
-      description: "Get a new SS or whatever it's called",
-    },
-    {
-      text: "Tonka Clothing Line",
-      href: "/newsletter",
-      description: "This whole section works just like linktree",
-    },
-    {
-      text: "15% some shit",
-      href: "/events",
-      description: "Some other affiliate",
-    },
-  ];
+  const routeApi = getRouteApi("/");
+
+  const linkTreeButtons = routeApi.useLoaderData();
+
+  // const linkTreeButtons = [
+  //   {
+  //     text: "Latest Episode",
+  //     href: "/latest-episode",
+  //     description: "Sub to the YouTube",
+  //   },
+  //   {
+  //     text: "Subscribe",
+  //     href: "/interviews",
+  //     description: "Exclusive content and rides",
+  //   },
+  //   {
+  //     text: "10% off at ERidePro",
+  //     href: "/behind-scenes",
+  //     description: "Get a new SS or whatever it's called",
+  //   },
+  //   {
+  //     text: "Tonka Clothing Line",
+  //     href: "/newsletter",
+  //     description: "This whole section works just like linktree",
+  //   },
+  //   {
+  //     text: "15% some shit",
+  //     href: "/events",
+  //     description: "Some other affiliate",
+  //   },
+  // ];
 
   return (
     <motion.div
