@@ -7,6 +7,6 @@ export default async function getAll() {
     return response;
   } catch (error) {
     console.log(error);
-    throw new Error();
+    return;
   }
 }
