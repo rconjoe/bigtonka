@@ -27,7 +27,7 @@ const AnimatedHero = () => {
   return (
     <BackgroundMedia
       type="video"
-      src="https://img.bigtonk.com/intro-low.mp4"
+      src="https://img.bigtonk.com/intro-high.mp4"
       variant="dark"
     >
       <div className="flex flex-col items-center justify-start w-full pt-6 md:pt-10 pb-12">
