@@ -7,7 +7,7 @@ import LinkRow from "./LinkRow";
 import LinkTree from "./LinkTree";
 import SponsorShowcase from "./SponsorShowcase";
 import MediaShowcase from "./MediaShowcase";
-import MerchStore from "./MerchStore"; // Import the new component
+import MerchStore from "./MerchStore";
 
 const AnimatedHero = () => {
   // State for animation cycles
