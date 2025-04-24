@@ -1,9 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaYoutube, FaInstagram } from "react-icons/fa";
+import { FaYoutube, FaInstagram, FaShoppingCart } from "react-icons/fa";
+import { useCart } from "../context/CartContext";
 
 const LinkRow = ({ setCurrentView, currentView }) => {
+  const { cartCount } = useCart();
+
   const menuContainerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -87,6 +90,21 @@ const LinkRow = ({ setCurrentView, currentView }) => {
             </motion.a>
           ))}
         </motion.div>
+        <motion.button
+          onClick={(e) => handleLinkClick(e, "cart")} // <-- Navigate to cart view
+          variants={menuItemVariants} // Apply animation variant
+          className={`relative text-white md:text-2xl font-medium tracking-wider hover:text-red-400 transition-colors duration-300 text-shadow ${currentView === "cart" ? "text-red-400" : ""
+            }`}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <FaShoppingCart size={24} />
+          {cartCount > 0 && ( // <-- Display count only if items exist
+            <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+              {cartCount}
+            </span>
+          )}
+        </motion.button>
       </div>
     </motion.nav>
   );
