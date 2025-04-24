@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion";
 import { FaShoppingCart, FaTshirt, FaTag, FaEnvelope } from "react-icons/fa";
+import { useCart } from "../context/CartContext";
 
 const MerchStore = () => {
+  const { addToCart } = useCart();
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -26,6 +29,7 @@ const MerchStore = () => {
 
   // Featured product
   const featuredProduct = {
+    id: "fp001",
     title: "WGA Season 2 Box Set",
     image: "/products/wga-box-set.jpg",
     price: 149.99,
@@ -59,6 +63,7 @@ const MerchStore = () => {
   // Products
   const products = [
     {
+      id: "prod001",
       name: "WGA Logo Tee",
       image: "/products/tee1.jpg",
       price: 29.99,
@@ -66,12 +71,14 @@ const MerchStore = () => {
       bestseller: true,
     },
     {
+      id: "prod002",
       name: "Ride or Die Hoodie",
       image: "/products/hoodie1.jpg",
       price: 59.99,
       category: "Apparel",
     },
     {
+      id: "prod003",
       name: "City Takeover Snapback",
       image: "/products/hat1.jpg",
       price: 34.99,
@@ -79,24 +86,28 @@ const MerchStore = () => {
       bestseller: true,
     },
     {
+      id: "prod004",
       name: "Street Culture Sticker Pack",
       image: "/products/stickers.jpg",
       price: 12.99,
       category: "Accessories",
     },
     {
+      id: "prod005",
       name: "Wheelie King Patch",
       image: "/products/patch1.jpg",
       price: 9.99,
       category: "Accessories",
     },
     {
+      id: "prod006",
       name: "Metal WGA Keychain",
       image: "/products/keychain.jpg",
       price: 19.99,
       category: "Accessories",
     },
     {
+      id: "prod007",
       name: "Season 1 Poster (Signed)",
       image: "/products/poster.jpg",
       price: 24.99,
@@ -104,6 +115,7 @@ const MerchStore = () => {
       bestseller: true,
     },
     {
+      id: "prod008",
       name: "Bike Life Mug",
       image: "/products/mug.jpg",
       price: 14.99,
@@ -164,6 +176,7 @@ const MerchStore = () => {
                   className="w-full py-3 px-6 bg-red-600 hover:bg-red-500 text-white rounded-lg font-semibold text-lg flex items-center justify-center gap-2 transition-colors"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
+                  onClick={() => addToCart(featuredProduct)}
                 >
                   <FaShoppingCart />
                   <span>ADD TO CART</span>
@@ -255,7 +268,13 @@ const MerchStore = () => {
                     <span className="text-white font-bold">
                       ${product.price}
                     </span>
-                    <button className="text-white bg-red-600/80 hover:bg-red-600 p-1.5 rounded-full">
+                    <button
+                      className="text-white bg-red-600/80 hover:bg-red-600 p-1.5 rounded-full"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addToCart(product);
+                      }}
+                    >
                       <FaShoppingCart size={14} />
                     </button>
                   </div>
@@ -322,7 +341,13 @@ const MerchStore = () => {
                 </h3>
                 <div className="flex justify-between items-center mt-2">
                   <span className="text-white font-bold">${product.price}</span>
-                  <button className="text-white bg-red-600/80 hover:bg-red-600 p-1.5 rounded-full">
+                  <button
+                    className="text-white bg-red-600/80 hover:bg-red-600 p-1.5 rounded-full"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      addToCart(product);
+                    }}
+                  >
                     <FaShoppingCart size={14} />
                   </button>
                 </div>
