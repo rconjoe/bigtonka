@@ -1,8 +1,8 @@
 export default async function getAll() {
+  const api_url = import.meta.env.VITE_API_URL
   try {
     const results = await fetch(
-      // env var? this is to a railway fcn
-      "https://amiable-perfection-production.up.railway.app/api/getAll",
+      api_url
     );
     const response = await results.json();
     return response;
