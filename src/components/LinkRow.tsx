@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion";
 import { FaYoutube, FaInstagram } from "react-icons/fa";
-import { useCart } from "../context/CartContext";
+// import { useCart } from "../context/CartContext";
 
 const LinkRow = ({ setCurrentView, currentView }) => {
-  const { cartCount } = useCart();
+  // const { cartCount } = useCart();
 
   const menuContainerVariants = {
     hidden: { opacity: 0 },
