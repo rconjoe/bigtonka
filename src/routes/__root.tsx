@@ -12,7 +12,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         property: 'og:description',
-        content: 'The official Big Tonka website',
+        content: "What's Good America?",
       },
       {
         name: "image",
