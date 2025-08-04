@@ -1,12 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaShoppingCart, FaTshirt, FaTag, FaEnvelope } from "react-icons/fa";
-import { useCart } from "../context/CartContext";
+// import { FaShoppingCart, FaTshirt, FaTag, FaEnvelope } from "react-icons/fa";
+// import { useCart } from "../context/CartContext";
 
 const MerchStore = () => {
-  const { addToCart } = useCart();
-
+  // const { addToCart } = useCart();
+  //
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -17,111 +17,111 @@ const MerchStore = () => {
       },
     },
   };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
-  };
-
-  // Featured product
-  const featuredProduct = {
-    id: "fp001",
-    title: "WGA Season 2 Box Set",
-    image: "/products/wga-box-set.jpg",
-    price: 149.99,
-    description:
-      "Limited edition collector's set with exclusive merch, behind-the-scenes footage, and signed memorabilia from the crew.",
-    badge: "LIMITED EDITION",
-  };
-
-  // Product categories
-  const categories = [
-    {
-      name: "Apparel",
-      icon: <FaTshirt />,
-      description: "T-shirts, hoodies, and hats",
-      image: "/categories/apparel.jpg",
-    },
-    {
-      name: "Accessories",
-      icon: <FaTag />,
-      description: "Stickers, patches, and keychains",
-      image: "/categories/accessories.jpg",
-    },
-    {
-      name: "Collectibles",
-      icon: <FaShoppingCart />,
-      description: "Limited edition items and memorabilia",
-      image: "/categories/collectibles.jpg",
-    },
-  ];
-
-  // Products
-  const products = [
-    {
-      id: "prod001",
-      name: "WGA Logo Tee",
-      image: "/products/tee1.jpg",
-      price: 29.99,
-      category: "Apparel",
-      bestseller: true,
-    },
-    {
-      id: "prod002",
-      name: "Ride or Die Hoodie",
-      image: "/products/hoodie1.jpg",
-      price: 59.99,
-      category: "Apparel",
-    },
-    {
-      id: "prod003",
-      name: "City Takeover Snapback",
-      image: "/products/hat1.jpg",
-      price: 34.99,
-      category: "Apparel",
-      bestseller: true,
-    },
-    {
-      id: "prod004",
-      name: "Street Culture Sticker Pack",
-      image: "/products/stickers.jpg",
-      price: 12.99,
-      category: "Accessories",
-    },
-    {
-      id: "prod005",
-      name: "Wheelie King Patch",
-      image: "/products/patch1.jpg",
-      price: 9.99,
-      category: "Accessories",
-    },
-    {
-      id: "prod006",
-      name: "Metal WGA Keychain",
-      image: "/products/keychain.jpg",
-      price: 19.99,
-      category: "Accessories",
-    },
-    {
-      id: "prod007",
-      name: "Season 1 Poster (Signed)",
-      image: "/products/poster.jpg",
-      price: 24.99,
-      category: "Collectibles",
-      bestseller: true,
-    },
-    {
-      id: "prod008",
-      name: "Bike Life Mug",
-      image: "/products/mug.jpg",
-      price: 14.99,
-      category: "Collectibles",
-    },
-  ];
+  //
+  // const itemVariants = {
+  //   hidden: { opacity: 0, y: 15 },
+  //   visible: {
+  //     opacity: 1,
+  //     y: 0,
+  //     transition: { duration: 0.5, ease: "easeOut" },
+  //   },
+  // };
+  //
+  // // Featured product
+  // const featuredProduct = {
+  //   id: "fp001",
+  //   title: "WGA Season 2 Box Set",
+  //   image: "/products/wga-box-set.jpg",
+  //   price: 149.99,
+  //   description:
+  //     "Limited edition collector's set with exclusive merch, behind-the-scenes footage, and signed memorabilia from the crew.",
+  //   badge: "LIMITED EDITION",
+  // };
+  //
+  // // Product categories
+  // const categories = [
+  //   {
+  //     name: "Apparel",
+  //     icon: <FaTshirt />,
+  //     description: "T-shirts, hoodies, and hats",
+  //     image: "/categories/apparel.jpg",
+  //   },
+  //   {
+  //     name: "Accessories",
+  //     icon: <FaTag />,
+  //     description: "Stickers, patches, and keychains",
+  //     image: "/categories/accessories.jpg",
+  //   },
+  //   {
+  //     name: "Collectibles",
+  //     icon: <FaShoppingCart />,
+  //     description: "Limited edition items and memorabilia",
+  //     image: "/categories/collectibles.jpg",
+  //   },
+  // ];
+  //
+  // // Products
+  // const products = [
+  //   {
+  //     id: "prod001",
+  //     name: "WGA Logo Tee",
+  //     image: "/products/tee1.jpg",
+  //     price: 29.99,
+  //     category: "Apparel",
+  //     bestseller: true,
+  //   },
+  //   {
+  //     id: "prod002",
+  //     name: "Ride or Die Hoodie",
+  //     image: "/products/hoodie1.jpg",
+  //     price: 59.99,
+  //     category: "Apparel",
+  //   },
+  //   {
+  //     id: "prod003",
+  //     name: "City Takeover Snapback",
+  //     image: "/products/hat1.jpg",
+  //     price: 34.99,
+  //     category: "Apparel",
+  //     bestseller: true,
+  //   },
+  //   {
+  //     id: "prod004",
+  //     name: "Street Culture Sticker Pack",
+  //     image: "/products/stickers.jpg",
+  //     price: 12.99,
+  //     category: "Accessories",
+  //   },
+  //   {
+  //     id: "prod005",
+  //     name: "Wheelie King Patch",
+  //     image: "/products/patch1.jpg",
+  //     price: 9.99,
+  //     category: "Accessories",
+  //   },
+  //   {
+  //     id: "prod006",
+  //     name: "Metal WGA Keychain",
+  //     image: "/products/keychain.jpg",
+  //     price: 19.99,
+  //     category: "Accessories",
+  //   },
+  //   {
+  //     id: "prod007",
+  //     name: "Season 1 Poster (Signed)",
+  //     image: "/products/poster.jpg",
+  //     price: 24.99,
+  //     category: "Collectibles",
+  //     bestseller: true,
+  //   },
+  //   {
+  //     id: "prod008",
+  //     name: "Bike Life Mug",
+  //     image: "/products/mug.jpg",
+  //     price: 14.99,
+  //     category: "Collectibles",
+  //   },
+  // ];
 
   return (
     <motion.div
