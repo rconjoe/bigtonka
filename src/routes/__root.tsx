@@ -5,19 +5,19 @@ export const Route = createRootRoute({
   head: () => ({
     meta: [
       {
-        title: 'BIG TONK™',
-      },
-      {
+        name: "title",
         property: 'og:title',
         content: 'BIG TONK™',
       },
       {
-        name: 'description',
+        name: "description",
+        property: 'og:description',
         content: 'The official Big Tonka website',
       },
       {
-        property: 'og:description',
-        content: 'The official Big Tonka website',
+        name: "image",
+        property: 'og:image',
+        content: 'https://img.bigtonk.com/tonkbanner.png',
       },
     ],
     links: [
