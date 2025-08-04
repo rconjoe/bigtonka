@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaYoutube, FaInstagram, FaShoppingCart } from "react-icons/fa";
+import { FaYoutube, FaInstagram } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
 
 const LinkRow = ({ setCurrentView, currentView }) => {
@@ -29,15 +29,16 @@ const LinkRow = ({ setCurrentView, currentView }) => {
 
   // Define menu links with view values (removed HOME)
   const menuLinks = [
-    { text: "SPONSORS", href: "#sponsors", view: "sponsors" },
-    { text: "MEDIA", href: "#media", view: "media" },
-    { text: "MERCH", href: "#merch", view: "merch" },
+    { text: "HOME", href: "home", view: "home" },
+    // { text: "HOME", href: "#sponsors", view: "sponsors" },
+    { text: "VIDEOS", href: "#media", view: "media" },
+    { text: "STORE", href: "#merch", view: "merch" },
   ];
 
   // Define social media links
   const socialLinks = [
-    { icon: <FaYoutube size={24} />, href: "https://youtube.com" },
-    { icon: <FaInstagram size={24} />, href: "https://instagram.com" },
+    { icon: <FaYoutube size={24} />, href: "https://youtube.com/@whatsgoodamerica1" },
+    { icon: <FaInstagram size={24} />, href: "https://instagram.com/whatsgoodamericaa" },
   ];
 
   // Handle link click
@@ -90,21 +91,21 @@ const LinkRow = ({ setCurrentView, currentView }) => {
             </motion.a>
           ))}
         </motion.div>
-        <motion.button
-          onClick={(e) => handleLinkClick(e, "cart")} // <-- Navigate to cart view
-          variants={menuItemVariants} // Apply animation variant
-          className={`relative text-white md:text-2xl font-medium tracking-wider hover:text-red-400 transition-colors duration-300 text-shadow ${currentView === "cart" ? "text-red-400" : ""
-            }`}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <FaShoppingCart size={24} />
-          {cartCount > 0 && ( // <-- Display count only if items exist
-            <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-              {cartCount}
-            </span>
-          )}
-        </motion.button>
+        {/* <motion.button */}
+        {/*   onClick={(e) => handleLinkClick(e, "cart")} // <-- Navigate to cart view */}
+        {/*   variants={menuItemVariants} // Apply animation variant */}
+        {/*   className={`relative text-white md:text-2xl font-medium tracking-wider hover:text-red-400 transition-colors duration-300 text-shadow ${currentView === "cart" ? "text-red-400" : "" */}
+        {/*     }`} */}
+        {/*   whileHover={{ scale: 1.1 }} */}
+        {/*   whileTap={{ scale: 0.95 }} */}
+        {/* > */}
+        {/*   <FaShoppingCart size={24} /> */}
+        {/*   {cartCount > 0 && ( // <-- Display count only if items exist */}
+        {/*     <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center"> */}
+        {/*       {cartCount} */}
+        {/*     </span> */}
+        {/*   )} */}
+        {/* </motion.button> */}
       </div>
     </motion.nav>
   );
