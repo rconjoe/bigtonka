@@ -8,7 +8,7 @@ export const Route = createRootRoute({
         title: 'BIG TONK™',
       },
       {
-        name: 'og:title',
+        property: 'og:title',
         content: 'BIG TONK™',
       },
       {
@@ -16,7 +16,7 @@ export const Route = createRootRoute({
         content: 'The official Big Tonka website',
       },
       {
-        name: 'og:description',
+        property: 'og:description',
         content: 'The official Big Tonka website',
       },
     ],
