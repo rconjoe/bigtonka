@@ -10,6 +10,7 @@ import MediaShowcase from "./MediaShowcase";
 import MerchStore from "./MerchStore";
 import CartView from "./CartView"; // <-- Import the new CartView component
 import { CartProvider } from "../context/CartContext"; // <-- Import the provider
+import Footer from "./Footer";
 
 const AnimatedHero = () => {
   const [animationKey, setAnimationKey] = useState(0);
@@ -44,6 +45,7 @@ const AnimatedHero = () => {
           {currentView === "media" && <MediaShowcase />}
           {currentView === "merch" && <MerchStore />}
           {currentView === "cart" && <CartView />} {/* <-- Add Cart View */}
+          <Footer />
         </div>
       </BackgroundMedia>
     </CartProvider>
