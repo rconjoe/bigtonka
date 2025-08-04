@@ -9,13 +9,13 @@ export const Route = createRootRoute({
         content: 'The official Big Tonka website',
       },
       {
-        title: 'BIG TONK',
+        title: 'BIG TONK™',
       },
     ],
     links: [
       {
         rel: 'icon',
-        href: '../../public/favicon.ico'
+        href: 'public/favicon.ico'
       }
     ],
   }),
