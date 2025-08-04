@@ -3,6 +3,8 @@
 FROM node:lts-alpine AS build
 
 # Set config
+ARG VITE_API_URL
+RUN echo $VITE_API_URL
 ENV NPM_CONFIG_UPDATE_NOTIFIER=false
 ENV NPM_CONFIG_FUND=false
 
