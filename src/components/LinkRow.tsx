@@ -37,7 +37,7 @@ const LinkRow = ({ setCurrentView, currentView }) => {
 
   // Define social media links
   const socialLinks = [
-    { icon: <FaYoutube size={24} />, href: "https://youtube.com/@whatsgoodamerica1" },
+    { icon: <FaYoutube size={24} />, href: "https://yt.openinapp.co/syx2o" },
     { icon: <FaInstagram size={24} />, href: "https://instagram.com/whatsgoodamericaa" },
   ];
 
