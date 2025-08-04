@@ -5,11 +5,19 @@ export const Route = createRootRoute({
   head: () => ({
     meta: [
       {
+        title: 'BIG TONK™',
+      },
+      {
+        name: 'og:title',
+        content: 'BIG TONK™',
+      },
+      {
         name: 'description',
         content: 'The official Big Tonka website',
       },
       {
-        title: 'BIG TONK™',
+        name: 'og:description',
+        content: 'The official Big Tonka website',
       },
     ],
     links: [
