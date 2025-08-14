@@ -126,7 +126,7 @@ const MediaShowcase = () => {
       </motion.div>
 
       {/* Shorts Section */}
-      <motion.div className="mb-12" variants={itemVariants}>
+      <motion.div className="mb-6" variants={itemVariants}>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl md:text-2xl text-white font-laser">
             SHORTS
