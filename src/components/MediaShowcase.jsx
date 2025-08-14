@@ -70,8 +70,8 @@ const MediaShowcase = () => {
       key="media-showcase"
     >
       {/* Featured Video Carousel Section */}
-      <motion.div className="w-full mb-6" variants={itemVariants}>
-        <h2 className="text-3xl md:text-4xl text-white font-laser mb-6">
+      <motion.div className="w-full mb-4" variants={itemVariants}>
+        <h2 className="text-2xl md:text-3xl text-white font-laser mb-4">
           NEW CONTENT
         </h2>
 
@@ -127,8 +127,8 @@ const MediaShowcase = () => {
 
       {/* Shorts Section */}
       <motion.div className="mb-12" variants={itemVariants}>
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl md:text-3xl text-white font-laser">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl md:text-2xl text-white font-laser">
             SHORTS
           </h2>
           <a
