@@ -93,11 +93,11 @@ const MediaShowcase = () => {
           <div className="flex items-center justify-between gap-4">
             <button
               onClick={handlePrevClick}
-              className={`bg-black/50 hover:bg-black/70 text-white p-3
+              className={`bg-black/50 hover:bg-black/70 text-white p-2
                 rounded-full transition-colors`}
               aria-label="Previous video"
             >
-              <FaChevronLeft size={24} />
+              <FaChevronLeft size={18} />
             </button>
 
             {/* Indicators */}
@@ -106,7 +106,7 @@ const MediaShowcase = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentVideoIndex(index)}
-                  className={`w-3 h-3 rounded-full ${index === currentVideoIndex ? "bg-white" : "bg-white/50"
+                  className={`w-2 h-2 rounded-full ${index === currentVideoIndex ? "bg-white" : "bg-white/50"
                     } transition-colors`}
                   aria-label={`Go to video ${index + 1}`}
                 ></button>
@@ -115,11 +115,11 @@ const MediaShowcase = () => {
 
             <button
               onClick={handleNextClick}
-              className={`bg-black/50 hover:bg-black/70 text-white p-3
+              className={`bg-black/50 hover:bg-black/70 text-white p-2
                 rounded-full transition-colors`}
               aria-label="Next video"
             >
-              <FaChevronRight size={24} />
+              <FaChevronRight size={18} />
             </button>
           </div>
         </div>
