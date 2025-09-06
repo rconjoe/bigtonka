@@ -7,8 +7,7 @@ import { useState } from "react"; // Import useState for managing component stat
 
 const LinkTree = () => {
   // State to control the visibility of lifestyle sponsors
-  const [showLifestyleSponsors, setShowLifestyleSponsors] =
-    useState(false);
+  const [showLifestyleSponsors, setShowLifestyleSponsors] = useState(false);
 
   const linkTreeVariants = {
     hidden: { opacity: 0 },
@@ -33,7 +32,7 @@ const LinkTree = () => {
   const routeApi = getRouteApi("/");
 
   // Get the linkTreeButtons from loader data
-  const linkTreeButtons = routeApi.useLoaderData().linkTreeButtons;
+  const linkTreeButtons = routeApi.useLoaderData().content.linkTreeButtons;
 
   // Filter the linkTreeButtons based on 'active' status and 'category'
   const filteredLinkTreeButtons = linkTreeButtons.filter((button) => {
@@ -43,10 +42,7 @@ const LinkTree = () => {
     }
 
     // Exclude buttons with 'lifestyle' category if the toggle is not checked
-    if (
-      button.category === "lifestyle" &&
-      !showLifestyleSponsors
-    ) {
+    if (button.category === "lifestyle" && !showLifestyleSponsors) {
       return false;
     }
 
@@ -55,9 +51,9 @@ const LinkTree = () => {
   });
 
   // Sort the remaining buttons by their 'order' property in ascending order
-  const sortedAndFilteredLinkTreeButtons = [
-    ...filteredLinkTreeButtons,
-  ].sort((a, b) => a.order - b.order);
+  const sortedAndFilteredLinkTreeButtons = [...filteredLinkTreeButtons].sort(
+    (a, b) => a.order - b.order,
+  );
 
   return (
     // Use a React Fragment to return multiple top-level elements
@@ -83,24 +79,24 @@ const LinkTree = () => {
               id="lifestyleToggle"
               className="sr-only" // Visually hide the native checkbox
               checked={showLifestyleSponsors}
-              onChange={(e) =>
-                setShowLifestyleSponsors(e.target.checked)
-              }
+              onChange={(e) => setShowLifestyleSponsors(e.target.checked)}
             />
             {/* Custom toggle switch UI */}
             <div
               className={`block w-8 h-5 rounded-full transition-colors
-                          duration-300 ${showLifestyleSponsors
-                  ? "bg-blue-800"
-                  : "bg-gray-600"
-                }`}
+                          duration-300 ${
+                            showLifestyleSponsors
+                              ? "bg-blue-800"
+                              : "bg-gray-600"
+                          }`}
             ></div>
             <div
               className={`dot absolute left-1 top-1 bg-white w-3 h-3
-                          rounded-full transition-transform duration-300 ${showLifestyleSponsors
-                  ? "translate-x-full"
-                  : "translate-x-0"
-                }`}
+                          rounded-full transition-transform duration-300 ${
+                            showLifestyleSponsors
+                              ? "translate-x-full"
+                              : "translate-x-0"
+                          }`}
             ></div>
           </div>
         </label>
