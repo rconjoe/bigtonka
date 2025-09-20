@@ -28,8 +28,8 @@ const MediaShowcase = () => {
 
   const routeApi = getRouteApi("/");
 
-  const carouselVideos = routeApi.useLoaderData().videos;
-  const shorts = routeApi.useLoaderData().shorts;
+  const carouselVideos = routeApi.useLoaderData().content.videos;
+  const shorts = routeApi.useLoaderData().content.shorts;
 
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   // State for the shorts modal
@@ -128,9 +128,7 @@ const MediaShowcase = () => {
       {/* Shorts Section */}
       <motion.div className="mb-6" variants={itemVariants}>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl md:text-2xl text-white font-laser">
-            SHORTS
-          </h2>
+          <h2 className="text-xl md:text-2xl text-white font-laser">SHORTS</h2>
           <a
             href="https://youtube.com/@whatsgoodamerica/shorts"
             target="_blank"
@@ -159,8 +157,7 @@ const MediaShowcase = () => {
               <img
                 src={
                   short.thumbnail ||
-                  `https://placehold.co/540x960/222/fff?text=Short+${index + 1
-                  }`
+                  `https://placehold.co/540x960/222/fff?text=Short+${index + 1}`
                 }
                 alt={short.title}
                 className="absolute inset-0 w-full h-full object-cover"
