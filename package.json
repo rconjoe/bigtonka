@@ -10,6 +10,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.47.0",
     "@medusajs/js-sdk": "^2.9.0",
     "@medusajs/types": "^2.9.0",
     "@tailwindcss/vite": "^4.0.6",

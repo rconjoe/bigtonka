@@ -101,6 +101,25 @@ const MerchStore = () => {
                 />
               </div>
 
+              {/* Variant Selector Row */}
+              {product.variants && product.variants.length > 0 && (
+                <div className="flex flex-wrap gap-2 px-4 py-2">
+                  {product.variants.map((variant, vIndex) => (
+                    <button
+                      key={vIndex}
+                      className="px-2 py-1 text-xs rounded-md border border-white/20 text-white/80 hover:bg-white/10 transition"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        // You can store selected variant in state or pass it to addToCart
+                        console.log("Selected variant:", variant);
+                      }}
+                    >
+                      {variant.title}
+                    </button>
+                  ))}
+                </div>
+              )}
+
               {/* Product Info */}
               <div className="p-4">
                 <span className="text-white/60 text-xs">

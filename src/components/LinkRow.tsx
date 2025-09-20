@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { FaYoutube, FaInstagram, FaShoppingCart } from "react-icons/fa";
+import AuthButton from "./AuthButton";
 import { useCart } from "../context/CartContext";
 
 const LinkRow = ({ setCurrentView, currentView }) => {
@@ -38,7 +39,10 @@ const LinkRow = ({ setCurrentView, currentView }) => {
   // Define social media links
   const socialLinks = [
     { icon: <FaYoutube size={24} />, href: "https://yt.openinapp.co/syx2o" },
-    { icon: <FaInstagram size={24} />, href: "https://instagram.com/whatsgoodamericaa" },
+    {
+      icon: <FaInstagram size={24} />,
+      href: "https://instagram.com/whatsgoodamericaa",
+    },
   ];
 
   // Handle link click
@@ -90,6 +94,9 @@ const LinkRow = ({ setCurrentView, currentView }) => {
               {link.icon}
             </motion.a>
           ))}
+        </motion.div>
+        <motion.div variants={menuItemVariants} className="flex items-center">
+          <AuthButton />
         </motion.div>
         <motion.button
           onClick={(e) => handleLinkClick(e, "cart")} // <-- Navigate to cart view
