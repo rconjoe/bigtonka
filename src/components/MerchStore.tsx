@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { getRouteApi } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { FaShoppingCart, FaEnvelope } from "react-icons/fa";
@@ -7,6 +8,8 @@ import { useCart } from "../context/CartContext";
 
 const MerchStore = () => {
   const routeApi = getRouteApi("/");
+
+  const [selectedVariant, setSelectedVariant] = useState(null);
 
   // Get the linkTreeButtons from loader data
   const products = routeApi.useLoaderData().products.products;
@@ -107,11 +110,14 @@ const MerchStore = () => {
                   {product.variants.map((variant, vIndex) => (
                     <button
                       key={vIndex}
-                      className="px-2 py-1 text-xs rounded-md border border-white/20 text-white/80 hover:bg-white/10 transition"
+                      className={`px-2 py-1 text-xs rounded-md border transition 
+      ${variant === selectedVariant
+                          ? "border-white bg-white/20 text-white" // selected state
+                          : "border-white/20 text-white/80 hover:bg-white/10" // default state
+                        }`}
                       onClick={(e) => {
                         e.stopPropagation();
-                        // You can store selected variant in state or pass it to addToCart
-                        console.log("Selected variant:", variant);
+                        setSelectedVariant(variant);
                       }}
                     >
                       {variant.title}
@@ -134,7 +140,10 @@ const MerchStore = () => {
                     className="text-white bg-red-600/80 hover:bg-red-600 p-1.5 rounded-full"
                     onClick={(e) => {
                       e.stopPropagation();
-                      addToCart(product);
+                      if (!selectedVariant) {
+                        alert("Please select a product variant.");
+                      }
+                      addToCart(selectedVariant);
                     }}
                   >
                     <FaShoppingCart size={14} />
@@ -145,47 +154,123 @@ const MerchStore = () => {
           ))}
         </div>
       </motion.div>
-
-      {/* Newsletter Signup */}
-      {/* <motion.div */}
-      {/*   className="backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl p-6 md:p-8" */}
-      {/*   variants={itemVariants} */}
-      {/* > */}
-      {/*   <div className="flex flex-col md:flex-row md:items-center justify-between gap-6"> */}
-      {/*     <div className="md:flex-1"> */}
-      {/*       <h3 className="text-2xl text-white font-bold font-tektur mb-2"> */}
-      {/*         JOIN THE CREW */}
-      {/*       </h3> */}
-      {/*       <p className="text-white/80"> */}
-      {/*         Sign up for our newsletter to get early access to drops, exclusive */}
-      {/*         discounts, and behind-the-scenes content. */}
-      {/*       </p> */}
-      {/*     </div> */}
-      {/**/}
-      {/*     <div className="md:w-1/2"> */}
-      {/*       <div className="flex"> */}
-      {/*         <input */}
-      {/*           type="email" */}
-      {/*           placeholder="Your email address" */}
-      {/*           className="flex-1 bg-white/10 border border-white/20 text-white px-4 py-3 rounded-l-lg focus:outline-none focus:border-red-400" */}
-      {/*         /> */}
-      {/*         <motion.button */}
-      {/*           className="bg-red-600 hover:bg-red-500 text-white px-4 py-3 rounded-r-lg flex items-center gap-2" */}
-      {/*           whileHover={{ scale: 1.03 }} */}
-      {/*           whileTap={{ scale: 0.97 }} */}
-      {/*         > */}
-      {/*           <FaEnvelope /> */}
-      {/*           <span className="hidden md:inline">SUBSCRIBE</span> */}
-      {/*         </motion.button> */}
-      {/*       </div> */}
-      {/*       <p className="text-white/60 text-xs mt-2"> */}
-      {/*         We respect your privacy. Unsubscribe at any time. */}
-      {/*       </p> */}
-      {/*     </div> */}
-      {/*   </div> */}
-      {/* </motion.div> */}
     </motion.div>
   );
 };
 
 export default MerchStore;
+
+{
+  /* Newsletter Signup */
+}
+{
+  /* <motion.div */
+}
+{
+  /*   className="backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl p-6 md:p-8" */
+}
+{
+  /*   variants={itemVariants} */
+}
+{
+  /* > */
+}
+{
+  /*   <div className="flex flex-col md:flex-row md:items-center justify-between gap-6"> */
+}
+{
+  /*     <div className="md:flex-1"> */
+}
+{
+  /*       <h3 className="text-2xl text-white font-bold font-tektur mb-2"> */
+}
+{
+  /*         JOIN THE CREW */
+}
+{
+  /*       </h3> */
+}
+{
+  /*       <p className="text-white/80"> */
+}
+{
+  /*         Sign up for our newsletter to get early access to drops, exclusive */
+}
+{
+  /*         discounts, and behind-the-scenes content. */
+}
+{
+  /*       </p> */
+}
+{
+  /*     </div> */
+}
+{
+  /**/
+}
+{
+  /*     <div className="md:w-1/2"> */
+}
+{
+  /*       <div className="flex"> */
+}
+{
+  /*         <input */
+}
+{
+  /*           type="email" */
+}
+{
+  /*           placeholder="Your email address" */
+}
+{
+  /*           className="flex-1 bg-white/10 border border-white/20 text-white px-4 py-3 rounded-l-lg focus:outline-none focus:border-red-400" */
+}
+{
+  /*         /> */
+}
+{
+  /*         <motion.button */
+}
+{
+  /*           className="bg-red-600 hover:bg-red-500 text-white px-4 py-3 rounded-r-lg flex items-center gap-2" */
+}
+{
+  /*           whileHover={{ scale: 1.03 }} */
+}
+{
+  /*           whileTap={{ scale: 0.97 }} */
+}
+{
+  /*         > */
+}
+{
+  /*           <FaEnvelope /> */
+}
+{
+  /*           <span className="hidden md:inline">SUBSCRIBE</span> */
+}
+{
+  /*         </motion.button> */
+}
+{
+  /*       </div> */
+}
+{
+  /*       <p className="text-white/60 text-xs mt-2"> */
+}
+{
+  /*         We respect your privacy. Unsubscribe at any time. */
+}
+{
+  /*       </p> */
+}
+{
+  /*     </div> */
+}
+{
+  /*   </div> */
+}
+{
+  /* </motion.div> */
+}
