@@ -95,9 +95,9 @@ const LinkRow = ({ setCurrentView, currentView }) => {
             </motion.a>
           ))}
         </motion.div>
-        <motion.div variants={menuItemVariants} className="flex items-center">
-          <AuthButton />
-        </motion.div>
+        {/* <motion.div variants={menuItemVariants} className="flex items-center"> */}
+        {/*   <AuthButton /> */}
+        {/* </motion.div> */}
         <motion.button
           onClick={(e) => handleLinkClick(e, "cart")} // <-- Navigate to cart view
           variants={menuItemVariants} // Apply animation variant
