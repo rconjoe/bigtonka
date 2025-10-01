@@ -8,3 +8,5 @@ export const medusa = new Medusa({
   debug: import.meta.env.MODE === "development",
   publishableKey: MEDUSA_PUBLISHABLE_KEY,
 });
+
+export const DEFAULT_REGION = "reg_01K49C2Y6MXY9ZNG0XCRCNBN1N";
