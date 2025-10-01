@@ -69,16 +69,18 @@ const CartView = () => {
                 <div className="flex items-center gap-4">
                   <img
                     src={
-                      item.image ||
-                      `https://placehold.co/64x64/222/fff?text=${item.name[0]}`
+                      item.thumbnail ||
+                      `https://placehold.co/64x64/222/fff?text=${item.name}`
                     }
                     alt={item.name}
                     className="w-16 h-16 object-cover rounded"
                   />
                   <div>
-                    <h3 className="font-semibold font-tektur">{item.name}</h3>
+                    <h3 className="font-semibold font-tektur">
+                      {item.name} - {item.title}
+                    </h3>
                     <p className="text-sm text-white/70">
-                      ${item.price.toFixed(2)}
+                      ${item.calculated_price.calculated_amount}
                     </p>
                   </div>
                 </div>
@@ -105,7 +107,10 @@ const CartView = () => {
 
                   {/* Item Total */}
                   <span className="w-20 text-right font-medium">
-                    ${(item.price * item.quantity).toFixed(2)}
+                    $
+                    {(
+                      item.calculated_price.calculated_amount * item.quantity
+                    ).toFixed(2)}
                   </span>
 
                   {/* Remove Button */}
