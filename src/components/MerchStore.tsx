@@ -135,15 +135,22 @@ const MerchStore = () => {
                   {product.title}
                 </h3>
                 <div className="flex justify-between items-center mt-2">
-                  <span className="text-white font-bold">${product.price}</span>
+                  <span className="text-white font-bold">
+                    ${product.variants[0].calculated_price?.calculated_amount}
+                  </span>
                   <button
                     className="text-white bg-red-600/80 hover:bg-red-600 p-1.5 rounded-full"
                     onClick={(e) => {
                       e.stopPropagation();
                       if (!selectedVariant) {
                         alert("Please select a product variant.");
+                        return;
                       }
-                      addToCart(selectedVariant);
+                      addToCart({
+                        ...selectedVariant,
+                        thumbnail: product.thumbnail,
+                        name: product.title,
+                      });
                     }}
                   >
                     <FaShoppingCart size={14} />
