@@ -46,7 +46,7 @@ const AnimatedHero = () => {
           {currentView === "sponsors" && <SponsorShowcase />}
           {currentView === "media" && <MediaShowcase />}
           {currentView === "merch" && <MerchStore />}
-          {currentView === "cart" && <CartView />} {/* <-- Add Cart View */}
+          {currentView === "cart" && <CartView />}
           <Footer />
         </div>
       </BackgroundMedia>
