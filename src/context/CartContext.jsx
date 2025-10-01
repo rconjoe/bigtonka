@@ -68,7 +68,8 @@ export const CartProvider = ({ children }) => {
   // --- Derived State (Calculations) ---
   const cartCount = cartItems.reduce((count, item) => count + item.quantity, 0);
   const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) =>
+      total + item.calculated_price.calculated_amount * item.quantity,
     0,
   );
 
