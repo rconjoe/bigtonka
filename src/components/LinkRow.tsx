@@ -6,7 +6,8 @@ import AuthButton from "./AuthButton";
 import { useCart } from "../context/CartContext";
 
 const LinkRow = ({ setCurrentView, currentView }) => {
-  const { cartCount } = useCart();
+  const { cart, cartCount } = useCart();
+  console.log(cart);
 
   const menuContainerVariants = {
     hidden: { opacity: 0 },
@@ -107,9 +108,9 @@ const LinkRow = ({ setCurrentView, currentView }) => {
           whileTap={{ scale: 0.95 }}
         >
           <FaShoppingCart size={24} />
-          {cartCount > 0 && ( // <-- Display count only if items exist
+          {cartCount() > 0 && ( // <-- Display count only if items exist
             <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-              {cartCount}
+              {cartCount()}
             </span>
           )}
         </motion.button>

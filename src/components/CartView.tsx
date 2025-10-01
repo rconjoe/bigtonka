@@ -3,14 +3,15 @@
 import { motion } from "framer-motion";
 import { useCart } from "../context/CartContext";
 import { FaTrash, FaPlus, FaMinus } from "react-icons/fa";
+import { formatPrice } from "@/lib/utils";
+import { Link } from "@tanstack/react-router";
 
 const CartView = () => {
   const {
-    cartItems,
+    cart,
     removeFromCart,
     updateQuantity,
-    clearCart,
-    totalPrice,
+    // totalPrice,
     // cartCount,
   } = useCart();
 
@@ -46,7 +47,7 @@ const CartView = () => {
         YOUR CART
       </motion.h2>
 
-      {cartItems.length === 0 ? (
+      {cart.items.length === 0 ? (
         <motion.p
           className="text-center text-white/80 text-xl"
           variants={itemVariants}
@@ -60,7 +61,7 @@ const CartView = () => {
             className="space-y-4 mb-8"
             variants={containerVariants} // Stagger items inside
           >
-            {cartItems.map((item) => (
+            {cart.items.map((item) => (
               <motion.div
                 key={item.id}
                 variants={itemVariants}
@@ -70,17 +71,18 @@ const CartView = () => {
                   <img
                     src={
                       item.thumbnail ||
-                      `https://placehold.co/64x64/222/fff?text=${item.name}`
+                      `https://placehold.co/64x64/222/fff?text=${item.title}`
                     }
-                    alt={item.name}
+                    alt={item.title}
                     className="w-16 h-16 object-cover rounded"
                   />
                   <div>
-                    <h3 className="font-semibold font-tektur">
-                      {item.name} - {item.title}
-                    </h3>
+                    <h3 className="font-semibold font-tektur">{item.title}</h3>
+                    <h2 className="text-xs font-tektur">
+                      {item.variant_title}
+                    </h2>
                     <p className="text-sm text-white/70">
-                      ${item.calculated_price.calculated_amount}
+                      {formatPrice(item.unit_price)}
                     </p>
                   </div>
                 </div>
@@ -89,7 +91,10 @@ const CartView = () => {
                   {/* Quantity Controls */}
                   <div className="flex items-center gap-2 border border-white/30 rounded">
                     <button
-                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        updateQuantity(item.id, item.quantity - 1);
+                      }}
                       className="px-2 py-1 hover:bg-white/20 rounded-l"
                       aria-label="Decrease quantity"
                     >
@@ -97,7 +102,10 @@ const CartView = () => {
                     </button>
                     <span className="px-2 font-medium">{item.quantity}</span>
                     <button
-                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        updateQuantity(item.id, item.quantity + 1);
+                      }}
                       className="px-2 py-1 hover:bg-white/20 rounded-r"
                       aria-label="Increase quantity"
                     >
@@ -107,15 +115,15 @@ const CartView = () => {
 
                   {/* Item Total */}
                   <span className="w-20 text-right font-medium">
-                    $
-                    {(
-                      item.calculated_price.calculated_amount * item.quantity
-                    ).toFixed(2)}
+                    {formatPrice(item.unit_price * item.quantity)}
                   </span>
 
                   {/* Remove Button */}
                   <button
-                    onClick={() => removeFromCart(item.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeFromCart(item.id);
+                    }}
                     className="text-red-500 hover:text-red-400"
                     aria-label="Remove item"
                   >
@@ -132,24 +140,20 @@ const CartView = () => {
             variants={itemVariants}
           >
             <div>
-              <button
-                onClick={clearCart}
-                className="text-sm text-white/70 hover:text-red-400 transition-colors"
-              >
-                Clear Cart
-              </button>
+              <div className="text-xl md:text-2xl font-bold mb-2">
+                {formatPrice(cart?.total ?? 0)}
+              </div>
             </div>
             <div className="text-right">
-              <div className="text-xl md:text-2xl font-bold mb-2">
-                Total: ${totalPrice.toFixed(2)}
-              </div>
-              <motion.button
-                className="w-full md:w-auto py-2 px-6 bg-red-600 hover:bg-red-500 text-white rounded-lg font-semibold text-lg transition-colors"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                PROCEED TO CHECKOUT
-              </motion.button>
+              <Link to="/checkout">
+                <motion.button
+                  className="w-full md:w-auto py-2 px-6 bg-red-600 hover:bg-red-500 text-white rounded-lg font-semibold text-lg transition-colors"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  PROCEED TO CHECKOUT
+                </motion.button>
+              </Link>
               <p className="text-xs text-white/60 mt-2">
                 Shipping & taxes calculated at checkout.
               </p>
