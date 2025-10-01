@@ -12,6 +12,7 @@ type CartContextType = {
   cartCount: () => number;
   removeFromCart: (itemId: string) => void;
   updateQuantity: (itemId: string, quantity: number) => void;
+  addOrderEmail: (email: string) => void;
 };
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -104,6 +105,21 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       });
   };
 
+  const addOrderEmail = (email: string) => {
+    const cartId = localStorage.getItem("cart_id");
+    if (!cartId) {
+      return;
+    }
+
+    medusa.store.cart
+      .update(cartId, {
+        email,
+      })
+      .then(({ cart: dataCart }) => {
+        setCart(dataCart);
+      });
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -114,6 +130,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         cartCount,
         removeFromCart,
         updateQuantity,
+        addOrderEmail,
       }}
     >
       {children}
