@@ -13,6 +13,10 @@ type CartContextType = {
   removeFromCart: (itemId: string) => void;
   updateQuantity: (itemId: string, quantity: number) => void;
   addOrderEmail: (email: string) => void;
+  addOrderAddress: (
+    billing_address: HttpTypes.StoreAddAddress,
+    shipping_address: HttpTypes.StoreAddAddress,
+  ) => void;
 };
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -111,13 +115,44 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       return;
     }
 
-    medusa.store.cart
-      .update(cartId, {
-        email,
-      })
-      .then(({ cart: dataCart }) => {
-        setCart(dataCart);
-      });
+    try {
+      medusa.store.cart
+        .update(cartId, {
+          email,
+        })
+        .then(({ cart: dataCart }) => {
+          setCart(dataCart);
+        });
+    } catch (e) {
+      alert(
+        "There was an error during checkout (addOrderEmail). Please try again.",
+      );
+    }
+  };
+
+  const addOrderAddress = (
+    billing_address: HttpTypes.StoreAddAddress,
+    shipping_address: HttpTypes.StoreAddAddress,
+  ) => {
+    const cartId = localStorage.getItem("cart_id");
+    if (!cartId) {
+      return;
+    }
+
+    try {
+      medusa.store.cart
+        .update(cartId, {
+          billing_address,
+          shipping_address,
+        })
+        .then(({ cart: dataCart }) => {
+          setCart(dataCart);
+        });
+    } catch (e) {
+      alert(
+        "There was an error during checkout (addOrderAddress). Please try again.",
+      );
+    }
   };
 
   return (
@@ -131,6 +166,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         removeFromCart,
         updateQuantity,
         addOrderEmail,
+        addOrderAddress,
       }}
     >
       {children}

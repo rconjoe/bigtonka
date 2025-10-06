@@ -4,13 +4,17 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "../context/CartContext";
 import { formatPrice } from "@/lib/utils";
+import { FaExclamation, FaSpinner } from "react-icons/fa";
+import { StateSelect, CitySelect } from "react-country-state-city";
 
 const steps = ["Email", "Address", "Fulfillment", "Payment"];
 
 const CheckoutFlow = () => {
-  const { cart } = useCart();
+  const { cart, addOrderEmail, addOrderAddress } = useCart();
 
   const [step, setStep] = useState(0);
+  const [stepLoading, setStepLoading] = useState(false);
+  const [currentState, setCurrentState] = useState(null);
   const [form, setForm] = useState({
     email: "",
     address: {
@@ -19,14 +23,57 @@ const CheckoutFlow = () => {
       city: "",
       state: "",
       zip: "",
-      country: "",
+      country: "USA",
     },
+    billingAddress: {
+      line1: "",
+      line2: "",
+      city: "",
+      state: "",
+      zip: "",
+      country: "USA",
+    },
+    sameAsShipping: true, // New state for the checkbox
     fulfillment: "shipping", // or pickup
     payment: "card", // or paypal, etc.
   });
 
-  const nextStep = () => {
+  const handleEmailStep = () => {
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(form.email)) {
+      setStepLoading(false);
+      alert("Please enter a valid email address.");
+      return;
+    }
+    addOrderEmail(form.email);
+    setStepLoading(false);
     if (step < steps.length - 1) setStep(step + 1);
+  };
+
+  const handleAddressStep = () => {
+    // Add validation for shipping address fields here if needed
+    // For now, just proceed
+    if (form.sameAsShipping) {
+      addOrderAddress(form.address, form.address);
+    } else {
+      addOrderAddress(form.address, form.billingAddress);
+    }
+    setStepLoading(false);
+    if (step < steps.length - 1) setStep(step + 1);
+  };
+
+  const nextStep = () => {
+    setStepLoading(true);
+    switch (step) {
+      case 0:
+        handleEmailStep();
+        break;
+      case 1:
+        handleAddressStep();
+        break;
+      default:
+        setStepLoading(false);
+        if (step < steps.length - 1) setStep(step + 1);
+    }
   };
 
   const prevStep = () => {
@@ -36,16 +83,115 @@ const CheckoutFlow = () => {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
-    const { name, value } = e.target;
-    if (step === 1 && name in form.address) {
+    const { name, value, type, checked } = e.target;
+
+    if (name === "sameAsShipping") {
+      setForm((prev) => ({ ...prev, sameAsShipping: checked }));
+    } else if (name in form.address) {
       setForm((prev) => ({
         ...prev,
         address: { ...prev.address, [name]: value },
+      }));
+    } else if (name in form.billingAddress) {
+      setForm((prev) => ({
+        ...prev,
+        billingAddress: { ...prev.billingAddress, [name]: value },
       }));
     } else {
       setForm((prev) => ({ ...prev, [name]: value }));
     }
   };
+
+  const renderAddressForm = (
+    addressType: "address" | "billingAddress",
+    title: string,
+  ) => (
+    <>
+      <label className="block text-sm mt-4">{title}</label>
+      <input
+        type="text"
+        name="line1"
+        placeholder="Address line 1"
+        value={form[addressType].line1}
+        onChange={(e) =>
+          setForm((prev) => ({
+            ...prev,
+            [addressType]: { ...prev[addressType], line1: e.target.value },
+          }))
+        }
+        className="w-full bg-white/10 border border-white/20 rounded px-3 py-2"
+      />
+      <input
+        type="text"
+        name="line2"
+        placeholder="Address line 2"
+        value={form[addressType].line2}
+        onChange={(e) =>
+          setForm((prev) => ({
+            ...prev,
+            [addressType]: { ...prev[addressType], line2: e.target.value },
+          }))
+        }
+        className="w-full bg-white/10 border border-white/20 rounded px-3 py-2"
+      />
+      <div className="grid grid-cols-2 gap-2">
+        <div className="w-full bg-white/10 border border-white/20 rounded px-3 py-2">
+          <CitySelect
+            placeHolder="City"
+            countryid={233}
+            stateid={currentState?.id}
+            onChange={(e) => {
+              setForm((prev) => ({
+                ...prev,
+                [addressType]: { ...prev[addressType], city: e.name },
+              }));
+            }}
+          />
+        </div>
+        <div className="w-full bg-white/10 border border-white/20 rounded px-3 py-2">
+          <StateSelect
+            placeHolder="State"
+            countryid={233}
+            onChange={(e) => {
+              setCurrentState(e);
+              setForm((prev) => ({
+                ...prev,
+                [addressType]: { ...prev[addressType], state: e.state_code },
+              }));
+            }}
+          />
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-2">
+        <input
+          type="text"
+          name="zip"
+          placeholder="ZIP / Postal Code"
+          value={form[addressType].zip}
+          onChange={(e) =>
+            setForm((prev) => ({
+              ...prev,
+              [addressType]: { ...prev[addressType], zip: e.target.value },
+            }))
+          }
+          className="w-full bg-white/10 border border-white/20 rounded px-3 py-2"
+        />
+        <input
+          type="text"
+          name="country"
+          disabled={true}
+          value="USA"
+          onChange={(e) =>
+            setForm((prev) => ({
+              ...prev,
+              [addressType]: { ...prev[addressType], country: e.target.value },
+            }))
+          }
+          className="w-full bg-white/10 border border-white/20 rounded px-3 py-2"
+        />
+      </div>
+    </>
+  );
 
   const containerVariants = {
     initial: { opacity: 0, x: 20 },
@@ -62,9 +208,8 @@ const CheckoutFlow = () => {
         {steps.map((label, i) => (
           <div
             key={i}
-            className={`flex-1 text-center text-xs ${
-              i <= step ? "text-red-500" : "text-white/40"
-            }`}
+            className={`flex-1 text-center text-xs ${i <= step ? "text-red-500" : "text-white/40"
+              }`}
           >
             {label}
           </div>
@@ -103,59 +248,28 @@ const CheckoutFlow = () => {
               exit="exit"
               className="space-y-2"
             >
-              <label className="block text-sm">Shipping Address</label>
-              <input
-                type="text"
-                name="line1"
-                placeholder="Address line 1"
-                value={form.address.line1}
-                onChange={handleInputChange}
-                className="w-full bg-white/10 border border-white/20 rounded px-3 py-2"
-              />
-              <input
-                type="text"
-                name="line2"
-                placeholder="Address line 2"
-                value={form.address.line2}
-                onChange={handleInputChange}
-                className="w-full bg-white/10 border border-white/20 rounded px-3 py-2"
-              />
-              <div className="grid grid-cols-2 gap-2">
-                <input
-                  type="text"
-                  name="city"
-                  placeholder="City"
-                  value={form.address.city}
-                  onChange={handleInputChange}
-                  className="w-full bg-white/10 border border-white/20 rounded px-3 py-2"
-                />
-                <input
-                  type="text"
-                  name="state"
-                  placeholder="State"
-                  value={form.address.state}
-                  onChange={handleInputChange}
-                  className="w-full bg-white/10 border border-white/20 rounded px-3 py-2"
-                />
+              <div className="flex text-sm">
+                <FaExclamation /> {"  "}
+                USA orders only (for now).
               </div>
-              <div className="grid grid-cols-2 gap-2">
-                <input
-                  type="text"
-                  name="zip"
-                  placeholder="ZIP / Postal Code"
-                  value={form.address.zip}
-                  onChange={handleInputChange}
-                  className="w-full bg-white/10 border border-white/20 rounded px-3 py-2"
-                />
-                <input
-                  type="text"
-                  name="country"
-                  placeholder="Country"
-                  value={form.address.country}
-                  onChange={handleInputChange}
-                  className="w-full bg-white/10 border border-white/20 rounded px-3 py-2"
-                />
+              {renderAddressForm("address", "Shipping Address")}
+              <div className="mt-4">
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    name="sameAsShipping"
+                    checked={form.sameAsShipping}
+                    onChange={handleInputChange}
+                    className="form-checkbox"
+                  />
+                  Billing address same as shipping address
+                </label>
               </div>
+              {!form.sameAsShipping && (
+                <div className="mt-4 border-t border-white/20 pt-4 space-y-2">
+                  {renderAddressForm("billingAddress", "Billing Address")}
+                </div>
+              )}
             </motion.div>
           )}
 
@@ -266,16 +380,18 @@ const CheckoutFlow = () => {
           <button
             className="px-4 py-2 rounded bg-white/10 hover:bg-white/20"
             onClick={prevStep}
+            disabled={stepLoading}
           >
-            Back
+            {stepLoading ? <FaSpinner className="fa-spin" /> : "Back"}
           </button>
         )}
         {step < steps.length - 1 && (
           <button
             className="ml-auto px-4 py-2 rounded bg-red-600 hover:bg-red-500"
             onClick={nextStep}
+            disabled={stepLoading}
           >
-            Next
+            {stepLoading ? <FaSpinner className="animate-spin" /> : "Next"}
           </button>
         )}
       </div>
