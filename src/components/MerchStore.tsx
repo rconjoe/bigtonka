@@ -132,7 +132,7 @@ const MerchStore = () => {
       key="merch-store"
     >
       <h2 className="text-3xl md:text-4xl text-white font-laser mb-6">
-        COMING... SEPTEMBER 2025
+        COMING SOON
       </h2>
     </motion.div>
   );
