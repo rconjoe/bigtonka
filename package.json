@@ -10,6 +10,8 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@medusajs/js-sdk": "^2.11.0",
+    "@medusajs/types": "^2.11.0",
     "@tailwindcss/vite": "^4.0.6",
     "@tanstack/react-router": "^1.114.3",
     "@tanstack/react-router-devtools": "^1.114.3",
