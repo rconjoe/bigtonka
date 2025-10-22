@@ -38,7 +38,10 @@ const LinkRow = ({ setCurrentView, currentView }) => {
   // Define social media links
   const socialLinks = [
     { icon: <FaYoutube size={24} />, href: "https://yt.openinapp.co/syx2o" },
-    { icon: <FaInstagram size={24} />, href: "https://instagram.com/whatsgoodamericaa" },
+    {
+      icon: <FaInstagram size={24} />,
+      href: "https://instagram.com/whatsgoodamericaa",
+    },
   ];
 
   // Handle link click
@@ -62,9 +65,11 @@ const LinkRow = ({ setCurrentView, currentView }) => {
             key={index}
             href={link.href}
             onClick={(e) => handleLinkClick(e, link.view)}
+            // @ts-ignore
             variants={menuItemVariants}
-            className={`text-white md:text-2xl font-medium tracking-wider hover:text-red-400 transition-colors duration-300 text-shadow ${currentView === link.view ? "text-red-400" : ""
-              }`}
+            className={`text-white md:text-2xl font-medium tracking-wider hover:text-red-400 transition-colors duration-300 text-shadow ${
+              currentView === link.view ? "text-red-400" : ""
+            }`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -75,6 +80,7 @@ const LinkRow = ({ setCurrentView, currentView }) => {
         {/* Social media links as a group */}
         <motion.div
           className="flex items-center space-x-4"
+          // @ts-ignore
           variants={menuItemVariants}
         >
           {socialLinks.map((link, index) => (

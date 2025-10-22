@@ -50,6 +50,7 @@ const SponsorShowcase = () => {
     >
       <motion.h2
         className="text-3xl md:text-4xl text-white text-center mb-8 font-laser"
+        // @ts-ignore
         variants={sponsorItemVariants}
       >
         OUR SPONSORS
@@ -62,6 +63,7 @@ const SponsorShowcase = () => {
             href={sponsor.href}
             target="_blank"
             rel="noopener noreferrer"
+            // @ts-ignore
             variants={sponsorItemVariants}
             className={`${getSizeClasses(
               sponsor.size,

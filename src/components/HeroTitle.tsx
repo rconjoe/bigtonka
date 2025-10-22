@@ -55,6 +55,7 @@ const HeroTitle = ({ animationKey, setCurrentView }: HeroTitleProps) => {
       {words.map((word, index) => (
         <motion.span
           key={index}
+          // @ts-ignore
           variants={wordVariants}
           className={`${word.color} text-shadow font-laser`}
         >
