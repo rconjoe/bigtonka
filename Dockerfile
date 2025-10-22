@@ -13,15 +13,17 @@ WORKDIR /app
 
 # Copy the files to the container image
 COPY package*.json ./
+COPY pnpm-lock.yaml ./
+
 
 # Install packages
-RUN npm ci
+RUN pnpm ci
 
 # Copy local code to the container image.
 COPY . ./
 
 # Build the app.
-RUN npm run build
+RUN pnpm run build
 
 # Use the Caddy image
 FROM caddy
