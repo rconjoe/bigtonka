@@ -5,24 +5,23 @@ FROM node:lts-alpine AS build
 # Set config
 ARG VITE_API_URL
 RUN echo $VITE_API_URL
-ENV NPM_CONFIG_UPDATE_NOTIFIER=false
-ENV NPM_CONFIG_FUND=false
+
+# Install pnpm globally
+RUN npm install -g pnpm
 
 # Create and change to the app directory.
 WORKDIR /app
 
 # Copy the files to the container image
-COPY package*.json ./
-COPY pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml ./
 
-
-# Install packages
-RUN pnpm ci
+# Install packages using pnpm
+RUN pnpm install --frozen-lockfile
 
 # Copy local code to the container image.
 COPY . ./
 
-# Build the app.
+# Build the app using pnpm
 RUN pnpm run build
 
 # Use the Caddy image
