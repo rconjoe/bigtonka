@@ -31,11 +31,13 @@ const LinkTree = () => {
 
   const routeApi = getRouteApi("/");
 
-  // Get the linkTreeButtons from loader data
-  const linkTreeButtons = routeApi.useLoaderData().linkTreeButtons;
+  // Get the linkrows from loader data
+  const {
+    links: { linkrows },
+  } = routeApi.useLoaderData();
 
-  // Filter the linkTreeButtons based on 'active' status and 'category'
-  const filteredLinkTreeButtons = linkTreeButtons.filter((button) => {
+  // Filter the linkrows based on 'active' status and 'category'
+  const filteredLinkTreeButtons = linkrows.filter((button) => {
     // Always exclude inactive buttons
     if (!button.active) {
       return false;

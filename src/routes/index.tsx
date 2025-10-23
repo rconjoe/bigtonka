@@ -1,11 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import AnimatedHero from "@/components/AnimatedHero";
-import getAll from "@/lib/api";
+import { sdk } from "@/lib/sdk";
 
 export const Route = createFileRoute("/")({
   component: App,
 
-  loader: () => getAll(),
+  loader: async () => {
+    const videos = await sdk.client.fetch("/youtube");
+    const links = await sdk.client.fetch("/linktree/linkrow");
+
+    return {
+      links,
+      videos,
+    };
+  },
 });
 
 function App() {
