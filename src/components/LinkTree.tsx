@@ -33,6 +33,7 @@ const LinkTree = () => {
 
   // Get the linkrows from loader data
   const {
+    // @ts-ignore
     links: { linkrows },
   } = routeApi.useLoaderData();
 

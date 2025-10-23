@@ -25,6 +25,7 @@ const SponsorShowcase = () => {
   };
 
   const routeApi = getRouteApi("/");
+  // @ts-ignore
   const sponsors = routeApi.useLoaderData().sponsors;
 
   // Helper function to determine grid size classes
