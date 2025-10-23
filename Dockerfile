@@ -5,6 +5,10 @@ FROM node:lts-alpine AS build
 # Set config
 ARG VITE_API_URL
 RUN echo $VITE_API_URL
+ARG VITE_MEDUSA_BACKEND_URL
+RUN echo $VITE_MEDUSA_BACKEND_URL
+ARG VITE_MEDUSA_PUBLISHABLE_KEY
+RUN echo $VITE_MEDUSA_PUBLISHABLE_KEY
 
 # Install pnpm globally
 RUN npm install -g pnpm
