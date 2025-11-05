@@ -3,6 +3,10 @@
 import { motion } from "framer-motion";
 import { useCart } from "../context/CartContext";
 import { FaTrash, FaPlus, FaMinus } from "react-icons/fa";
+import { sdk } from "../lib/sdk";
+import { useNavigate } from "@tanstack/react-router";
+
+const stripe_key = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 
 const CartView = () => {
   const {
@@ -13,6 +17,8 @@ const CartView = () => {
     totalPrice,
     // cartCount,
   } = useCart();
+
+  const navigate = useNavigate();
 
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -29,6 +35,26 @@ const CartView = () => {
   const itemVariants = {
     hidden: { opacity: 0, x: -20 },
     visible: { opacity: 1, x: 0 },
+  };
+
+  const handleCheckout = async () => {
+    try {
+      const response = await sdk.client.fetch("/checkout/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: cartItems,
+      });
+
+      // @ts-ignore
+      const id = response.clientSecret;
+
+      navigate({ to: "/checkout", search: { id } });
+    } catch (e) {
+      console.error("Checkout process failed:", e);
+      alert("Could not proceed to checkout. Please try again later.");
+    }
   };
 
   return (
@@ -142,6 +168,7 @@ const CartView = () => {
                 className="w-full md:w-auto py-2 px-6 bg-red-600 hover:bg-red-500 text-white rounded-lg font-semibold text-lg transition-colors"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
+                onClick={() => handleCheckout()}
               >
                 PROCEED TO CHECKOUT
               </motion.button>
