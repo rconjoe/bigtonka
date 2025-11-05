@@ -30,18 +30,22 @@ export const CartProvider = ({ children }) => {
   // --- Cart Logic Functions ---
   const addToCart = (product) => {
     setCartItems((prevItems) => {
-      // Check if item already exists
-      const existingItem = prevItems.find((item) => item.id === product.id);
+      // Determine a unique ID for the cart item, including variant if present
+      const uniqueCartItemId = product.variantId || product.id;
+
+      const existingItem = prevItems.find(
+        (item) => item.uniqueCartItemId === uniqueCartItemId,
+      );
       if (existingItem) {
         // Increase quantity
         return prevItems.map((item) =>
-          item.id === product.id
+          item.uniqueCartItemId === uniqueCartItemId
             ? { ...item, quantity: item.quantity + 1 }
             : item,
         );
       } else {
         // Add new item
-        return [...prevItems, { ...product, quantity: 1 }];
+        return [...prevItems, { ...product, quantity: 1, uniqueCartItemId }];
       }
     });
   };
