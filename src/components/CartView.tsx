@@ -6,8 +6,6 @@ import { FaTrash, FaPlus, FaMinus } from "react-icons/fa";
 import { sdk } from "../lib/sdk";
 import { useNavigate } from "@tanstack/react-router";
 
-const stripe_key = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
-
 const CartView = () => {
   const {
     cartItems,

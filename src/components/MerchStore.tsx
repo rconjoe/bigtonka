@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { getRouteApi, useNavigate } from "@tanstack/react-router";
+import { getRouteApi } from "@tanstack/react-router";
 import { useState } from "react";
 import { useCart } from "../context/CartContext"; // Assuming path is correct
 import { FaShoppingCart, FaCheckCircle } from "react-icons/fa"; // For add to cart icon and success
@@ -29,8 +29,7 @@ interface MedusaProduct {
 }
 
 const MerchStore = () => {
-  const navigate = useNavigate();
-  const { addToCart, cartItems } = useCart();
+  const { addToCart } = useCart();
   const [addedProductId, setAddedProductId] = useState<string | null>(null);
 
   const containerVariants = {
@@ -109,16 +108,6 @@ const MerchStore = () => {
     setTimeout(() => setAddedProductId(null), 1500); // Clear after a short delay
   };
 
-  const handleProceedToCheckout = () => {
-    // In a real application, you would:
-    // 1. Create a checkout session on your backend using the cartItems.
-    // 2. Redirect the user to the Stripe Checkout page URL returned by your backend.
-    console.log("Proceeding to checkout with cart:", cartItems);
-
-    // For now, let's just navigate to the cart view
-    navigate({ to: "/#cart" });
-  };
-
   return (
     <motion.div
       className="w-full max-w-5xl mx-auto px-4 mt-8 md:mt-12 pb-16 text-white"
@@ -129,96 +118,101 @@ const MerchStore = () => {
     >
       <motion.h2
         className="text-3xl md:text-4xl font-laser mb-8 text-center"
+        // @ts-ignore
         variants={itemVariants}
       >
         MERCHANDISE
       </motion.h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {products.map((product: MedusaProduct) => {
-          // Initialize selected variant if not already set
-          if (!selectedVariants[product.id] && product.variants.length > 0) {
-            setSelectedVariants((prev) => ({
-              ...prev,
-              [product.id]: product.variants[0].id,
-            }));
-          }
+        {
+          // @ts-ignore
+          products.map((product: MedusaProduct) => {
+            // Initialize selected variant if not already set
+            if (!selectedVariants[product.id] && product.variants.length > 0) {
+              setSelectedVariants((prev) => ({
+                ...prev,
+                [product.id]: product.variants[0].id,
+              }));
+            }
 
-          const currentSelectedVariant = product.variants.find(
-            (v) => v.id === selectedVariants[product.id],
-          );
+            const currentSelectedVariant = product.variants.find(
+              (v) => v.id === selectedVariants[product.id],
+            );
 
-          const displayPrice = currentSelectedVariant
-            ? currentSelectedVariant.calculated_price.calculated_amount
-            : null;
+            const displayPrice = currentSelectedVariant
+              ? currentSelectedVariant.calculated_price.calculated_amount
+              : null;
 
-          return (
-            <motion.div
-              key={product.id}
-              variants={itemVariants}
-              className="flex flex-col p-4 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 relative overflow-hidden"
-            >
-              {/* Added to cart confirmation */}
-              {addedProductId === product.id && (
-                <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  className="absolute inset-0 flex items-center justify-center bg-green-700/80 text-white text-xl font-bold rounded-lg z-20"
-                >
-                  <FaCheckCircle className="mr-2" /> Added!
-                </motion.div>
-              )}
-
-              <img
-                src={
-                  product.thumbnail ||
-                  `https://placehold.co/300x300/222/fff?text=${product.title}`
-                }
-                alt={product.title}
-                className="w-full h-96 object-cover rounded-md mb-4"
-              />
-              <h3 className="text-xl font-semibold font-tektur mb-2">
-                {product.title}
-              </h3>
-              <p className="text-white/80 text-sm mb-3 flex-grow">
-                {product.description}
-              </p>
-
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-lg font-bold">
-                  {displayPrice ? `$${displayPrice.toFixed(2)}` : "N/A"}
-                </span>
-
-                {/* Variant Selector */}
-                {product.variants.length > 1 && (
-                  <select
-                    value={selectedVariants[product.id] || ""}
-                    onChange={(e) =>
-                      handleVariantChange(product.id, e.target.value)
-                    }
-                    className="p-2 rounded bg-black/50 text-white border border-white/30 text-sm font-tektur cursor-pointer"
-                  >
-                    {product.variants.map((variant) => (
-                      <option key={variant.id} value={variant.id}>
-                        {variant.title}
-                      </option>
-                    ))}
-                  </select>
-                )}
-              </div>
-
-              <motion.button
-                onClick={() => handleAddToCart(product)}
-                className="w-full py-2 px-4 bg-red-600 hover:bg-red-500 text-white rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+            return (
+              <motion.div
+                key={product.id}
+                // @ts-ignore
+                variants={itemVariants}
+                className="flex flex-col p-4 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20 relative overflow-hidden"
               >
-                <FaShoppingCart /> Add to Cart
-              </motion.button>
-            </motion.div>
-          );
-        })}
+                {/* Added to cart confirmation */}
+                {addedProductId === product.id && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    className="absolute inset-0 flex items-center justify-center bg-green-700/80 text-white text-xl font-bold rounded-lg z-20"
+                  >
+                    <FaCheckCircle className="mr-2" /> Added!
+                  </motion.div>
+                )}
+
+                <img
+                  src={
+                    product.thumbnail ||
+                    `https://placehold.co/300x300/222/fff?text=${product.title}`
+                  }
+                  alt={product.title}
+                  className="w-full h-96 object-cover rounded-md mb-4"
+                />
+                <h3 className="text-xl font-semibold font-tektur mb-2">
+                  {product.title}
+                </h3>
+                <p className="text-white/80 text-sm mb-3 flex-grow">
+                  {product.description}
+                </p>
+
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-lg font-bold">
+                    {displayPrice ? `$${displayPrice.toFixed(2)}` : "N/A"}
+                  </span>
+
+                  {/* Variant Selector */}
+                  {product.variants.length > 1 && (
+                    <select
+                      value={selectedVariants[product.id] || ""}
+                      onChange={(e) =>
+                        handleVariantChange(product.id, e.target.value)
+                      }
+                      className="p-2 rounded bg-black/50 text-white border border-white/30 text-sm font-tektur cursor-pointer"
+                    >
+                      {product.variants.map((variant) => (
+                        <option key={variant.id} value={variant.id}>
+                          {variant.title}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                </div>
+
+                <motion.button
+                  onClick={() => handleAddToCart(product)}
+                  className="w-full py-2 px-4 bg-red-600 hover:bg-red-500 text-white rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <FaShoppingCart /> Add to Cart
+                </motion.button>
+              </motion.div>
+            );
+          })
+        }
       </div>
 
       {/* {cartItems.length > 0 && ( */}

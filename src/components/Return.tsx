@@ -27,7 +27,9 @@ export function Return() {
     sdk.client
       .fetch(`/checkout/status?session_id=${session_id}`)
       .then((response) => {
+        // @ts-ignore
         setStatus(response.status);
+        // @ts-ignore
         setCustomerEmail(response.customer_email);
       })
       .catch((error) => {
