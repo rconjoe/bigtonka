@@ -50,7 +50,10 @@ const CartView = () => {
       navigate({
         to: "/checkout",
         // @ts-ignore
-        search: { id: result.clientSecret, cartId: result.cartId },
+        search: {
+          id: result.clientSecret,
+          // cartId: result.cartId
+        },
       });
     } catch (e) {
       console.error("Checkout process failed:", e);
