@@ -37,7 +37,8 @@ const CartView = () => {
 
   const handleCheckout = async () => {
     try {
-      const response = await sdk.client.fetch("/checkout/create", {
+      // @ts-ignore
+      const { result } = await sdk.client.fetch("/checkout/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,9 +47,11 @@ const CartView = () => {
       });
 
       // @ts-ignore
-      const id = response.clientSecret;
-
-      navigate({ to: "/checkout", search: { id } });
+      navigate({
+        to: "/checkout",
+        // @ts-ignore
+        search: { id: result.clientSecret, cartId: result.cartId },
+      });
     } catch (e) {
       console.error("Checkout process failed:", e);
       alert("Could not proceed to checkout. Please try again later.");
