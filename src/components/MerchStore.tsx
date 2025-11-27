@@ -142,12 +142,12 @@ const MerchStore = () => {
             );
 
             const originalDisplayPrice = currentSelectedVariant
-              ? currentSelectedVariant.calculated_price.calculated_amount * 1.2
+              ? currentSelectedVariant.calculated_price.calculated_amount +
+                currentSelectedVariant.calculated_price.calculated_amount * 0.25
               : null;
 
-            const saleDisplayPrice = originalDisplayPrice
-              ? originalDisplayPrice
-              : null; // Apply 20% discount for display
+            const saleDisplayPrice =
+              currentSelectedVariant?.calculated_price.calculated_amount;
 
             return (
               <motion.div
