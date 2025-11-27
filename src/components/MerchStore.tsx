@@ -85,9 +85,10 @@ const MerchStore = () => {
       return;
     }
 
-    const price = selectedVariant.calculated_price.calculated_amount;
+    const originalPrice = selectedVariant.calculated_price.calculated_amount;
+    const salePrice = originalPrice * 0.8; // Apply 20% discount
 
-    if (price === undefined) {
+    if (originalPrice === undefined) {
       console.error("Price not found for selected variant:", selectedVariant);
       return;
     }
@@ -95,7 +96,7 @@ const MerchStore = () => {
     const cartProduct = {
       id: product.id, // Medusa product ID
       name: `${product.title} (${selectedVariant.title})`, // Combine name and variant for display
-      price: price, // Medusa prices are usually in cents
+      price: salePrice, // Use the sale price for the cart
       image: product.thumbnail,
       variantId: selectedVariant.id, // Medusa variant ID for uniqueness
       uniqueCartItemId: selectedVariant.id, // Use variant ID as the true unique ID in cart
@@ -140,9 +141,13 @@ const MerchStore = () => {
               (v) => v.id === selectedVariants[product.id],
             );
 
-            const displayPrice = currentSelectedVariant
-              ? currentSelectedVariant.calculated_price.calculated_amount
+            const originalDisplayPrice = currentSelectedVariant
+              ? currentSelectedVariant.calculated_price.calculated_amount * 1.2
               : null;
+
+            const saleDisplayPrice = originalDisplayPrice
+              ? originalDisplayPrice
+              : null; // Apply 20% discount for display
 
             return (
               <motion.div
@@ -179,9 +184,19 @@ const MerchStore = () => {
                 </p>
 
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-lg font-bold">
-                    {displayPrice ? `$${displayPrice.toFixed(2)}` : "N/A"}
-                  </span>
+                  {originalDisplayPrice && (
+                    <div className="flex items-center gap-2">
+                      <span className="text-white/60 line-through text-md">
+                        ${originalDisplayPrice.toFixed(2)}
+                      </span>
+                      <span className="text-lg font-bold text-red-400">
+                        ${saleDisplayPrice?.toFixed(2)}
+                      </span>
+                    </div>
+                  )}
+                  {!originalDisplayPrice && (
+                    <span className="text-lg font-bold">N/A</span>
+                  )}
 
                   {/* Variant Selector */}
                   {product.variants.length > 1 && (

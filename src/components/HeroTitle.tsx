@@ -42,27 +42,38 @@ const HeroTitle = ({ animationKey, setCurrentView }: HeroTitleProps) => {
   };
 
   return (
-    <motion.div
-      key={animationKey}
-      className="text-5xl md:text-8xl font-bold tracking-wide flex flex-wrap justify-center gap-x-8 gap-y-1 cursor-pointer"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      onClick={handleTitleClick}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-    >
-      {words.map((word, index) => (
-        <motion.span
-          key={index}
-          // @ts-ignore
-          variants={wordVariants}
-          className={`${word.color} text-shadow font-laser`}
-        >
-          {word.text}
-        </motion.span>
-      ))}
-    </motion.div>
+    <>
+      {/* Black Friday Sale Announcement */}
+      <motion.div
+        className="bg-purple-700 text-white text-center py-3 px-4 rounded-lg mb-8 shadow-lg font-bold text-lg md:text-xl"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+      >
+        🎉 BLACK FRIDAY SALE! Get 20% OFF Sitewide! 🎉
+      </motion.div>
+      <motion.div
+        key={animationKey}
+        className="text-5xl md:text-8xl font-bold tracking-wide flex flex-wrap justify-center gap-x-8 gap-y-1 cursor-pointer"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        onClick={handleTitleClick}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        {words.map((word, index) => (
+          <motion.span
+            key={index}
+            // @ts-ignore
+            variants={wordVariants}
+            className={`${word.color} text-shadow font-laser`}
+          >
+            {word.text}
+          </motion.span>
+        ))}
+      </motion.div>
+    </>
   );
 };
 

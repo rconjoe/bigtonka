@@ -87,19 +87,17 @@ const LinkTree = () => {
             {/* Custom toggle switch UI */}
             <div
               className={`block w-8 h-5 rounded-full transition-colors
-                          duration-300 ${
-                            showLifestyleSponsors
-                              ? "bg-blue-800"
-                              : "bg-gray-600"
-                          }`}
+                          duration-300 ${showLifestyleSponsors
+                  ? "bg-blue-800"
+                  : "bg-gray-600"
+                }`}
             ></div>
             <div
               className={`dot absolute left-1 top-1 bg-white w-3 h-3
-                          rounded-full transition-transform duration-300 ${
-                            showLifestyleSponsors
-                              ? "translate-x-full"
-                              : "translate-x-0"
-                          }`}
+                          rounded-full transition-transform duration-300 ${showLifestyleSponsors
+                  ? "translate-x-full"
+                  : "translate-x-0"
+                }`}
             ></div>
           </div>
         </label>
