@@ -5,7 +5,7 @@ const Footer = () => {
       flex flex-col items-center text-center"
     >
       <a
-        href="https://www.instagram.com/joebullettt"
+        href="https://trog.codes"
         target="_blank"
         rel="noopener noreferrer"
         className="text-white/60 font-tektur text-sm md:text-base
